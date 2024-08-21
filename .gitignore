@@ -4,4 +4,5 @@ build/
 arquivos-corrigidos/
 *.xlsx
 *.xlsm
+*.exe
 app.spec

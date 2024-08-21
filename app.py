@@ -6,10 +6,8 @@ df = pd.read_excel('Chamados.xlsx')
 
 # Convertendo os valores da coluna data
 df['Data de Início'] = pd.to_datetime(df['Data de Início'], format='%d/%m/%Y')
-df['Término Previsto'] = pd.to_datetime(
-    df['Término Previsto'], format='%d/%m/%Y')
-df['Próxima Atualização'] = pd.to_datetime(
-    df['Próxima Atualização'], format='%d/%m/%Y')
+df['Término Previsto'] = pd.to_datetime(df['Término Previsto'], format='%d/%m/%Y')
+df['Próxima Atualização'] = pd.to_datetime(df['Próxima Atualização'], format='%d/%m/%Y')
 
 
 def ajustar_data(data):
