@@ -1,4 +1,7 @@
 venv/
+dist/
+build/
 arquivos-corrigidos/
 *.xlsx
 *.xlsm
+app.spec
