@@ -1,34 +1,34 @@
 import pandas as pd
 from datetime import timedelta, datetime
 
+
 # Leitura do Excel com os dados
 df = pd.read_excel('Chamados.xlsx')
 
-# Convertendo os valores da coluna data
-df['Data de Início'] = pd.to_datetime(df['Data de Início'], format='%d/%m/%Y')
-df['Término Previsto'] = pd.to_datetime(df['Término Previsto'], format='%d/%m/%Y')
-df['Próxima Atualização'] = pd.to_datetime(df['Próxima Atualização'], format='%d/%m/%Y')
+
+# Função para ajustar e formatar as datas
+def ajustar_e_formatar_data(coluna) -> None:
+    df[coluna] = pd.to_datetime(df[coluna], format='%d/%m/%Y')
+    df[coluna] = df[coluna].apply(ajustar_data)
+    df[coluna] = df[coluna].dt.strftime('%d/%m/%Y')
 
 
 def ajustar_data(data):
-    if data.weekday() == 5:
+    if data.weekday() == 5:  # Se for sábado
         return data - timedelta(days=1)
-    elif data.weekday() == 6:
+    elif data.weekday() == 6:  # Se for domingo
         return data - timedelta(days=2)
     else:
         return data
 
 
-df['Data de Início'] = df['Data de Início'].apply(ajustar_data)
-df['Data de Início'] = df['Data de Início'].dt.strftime('%d/%m/%Y')
-
-df['Término Previsto'] = df['Término Previsto'].apply(ajustar_data)
-df['Término Previsto'] = df['Término Previsto'].dt.strftime('%d/%m/%Y')
-
-df['Próxima Atualização'] = df['Próxima Atualização'].apply(ajustar_data)
-df['Próxima Atualização'] = df['Próxima Atualização'].dt.strftime('%d/%m/%Y')
+colunas_para_ajustar = ['Data de Início',
+                        'Término Previsto', 'Próxima Atualização']
+for coluna in colunas_para_ajustar:
+    ajustar_e_formatar_data(coluna)
 
 
 # Salvando os valores convertidos
 data_atual = datetime.now().strftime('%d.%m.%Y')
 df.to_excel(f'{data_atual} - Chamados-Corrigido.xlsx', index=False)
+print('Processo concluído!')
