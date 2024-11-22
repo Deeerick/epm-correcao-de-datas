@@ -22,8 +22,7 @@ def ajustar_data(data):
         return data
 
 
-colunas_para_ajustar = ['Data de Início',
-                        'Término Previsto', 'Próxima Atualização']
+colunas_para_ajustar = ['Início', 'Término', 'Próxima_Atualização']
 for coluna in colunas_para_ajustar:
     ajustar_e_formatar_data(coluna)
 
